@@ -1,5 +1,5 @@
 {
-  "name": "@charliewilco/esm",
+  "name": "@charliewilco/iterable-lists",
   "license": "Unlicense",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
