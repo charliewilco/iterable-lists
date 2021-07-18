@@ -1,4 +1,4 @@
-<h1 align="center">ES Module Defaults for TypeScript Libs</h1>
+<h1 align="center">Iterable Lists</h1>
 
 Uses prettier, rollup, esbuild and vite for the example.
 
