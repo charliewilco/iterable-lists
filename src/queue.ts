@@ -1,61 +1,62 @@
-import { ListNode } from "./node";
-import { IListLike } from "./types";
+import { INode } from "./node";
+import { BaseList, IListLike } from "./base";
 
-export class Queue<T> implements IListLike<T> {
-  public head: ListNode<T> | null = null;
-  public tail: ListNode<T> | null = null;
-  private _length: number = 0;
+interface IQueueList<T> extends IListLike<T> {
+  peek(): T;
+  add(value: T): boolean;
+  remove(): T | null;
+}
 
+// First In First Out
+export class Queue<T> extends BaseList<T> implements IQueueList<T>, Iterable<T> {
   constructor(initialPayload?: T) {
-    if (initialPayload) this.head = new ListNode(initialPayload);
+    super();
+    if (initialPayload) {
+      this.addFront(initialPayload);
+    }
   }
 
-  public get isEmpty(): boolean {
-    return this.head === null;
-  }
+  public static fromEntries<T>(array: T[]): Queue<T> {
+    const q = new Queue<T>();
 
-  public get size(): number {
-    return this._length;
+    for (const value of array) {
+      q.add(value);
+    }
+
+    return q;
   }
 
   public peek(): T {
-    if (this.head !== null) {
+    if (this.head) {
       return this.head.data;
     }
 
     throw new Error("Tooooooo much");
   }
 
-  public add(value: T): void {
-    if (this.isEmpty) {
-      this.head = new ListNode(value);
-    }
-
-    if (this.tail !== null) {
-      this.tail.next = new ListNode(value);
-    }
-    this.tail = new ListNode(value);
-    this._length++;
+  public add(value: T): boolean {
+    return this.addFront(value);
   }
 
-  public remove(): T {
-    if (this.head === null) {
-      this.tail = null;
-      throw new Error("Nothing to remove");
+  public remove(): T | null {
+    return this.removeFront();
+  }
+
+  public values(): T[] {
+    const values = [];
+    let current: INode<T> | null | undefined = this.head;
+    while (current !== null) {
+      if (current) {
+        values.unshift(current.data);
+        current = current.next;
+      }
     }
-    const { data, next } = this.head;
-
-    this.head = next;
-    this._length--;
-
-    return data;
+    return values;
   }
 
   *[Symbol.iterator]() {
-    while (this._length) {
-      if (this.tail) {
-        yield this.tail.data;
-      }
+    for (const value of this.values()) {
+      yield value;
     }
   }
 }
