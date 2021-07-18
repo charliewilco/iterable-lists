@@ -1,6 +1,6 @@
-import { FakeMapper } from "../../src";
+import { Queue } from "../../src";
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
-const m = new FakeMapper().set("#app", app);
+const m = new Queue(app);
 
 console.log(m);
