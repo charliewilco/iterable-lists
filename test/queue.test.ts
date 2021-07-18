@@ -31,4 +31,9 @@ describe("Queue", () => {
     expect(collector).toHaveBeenCalledTimes(2);
     expect(collector.mock.calls).toEqual([["1"], ["2"]]);
   });
+
+  it("can take an initial item", () => {
+    const q = new Queue<string>("first");
+    expect(q.head?.data).toEqual("first");
+  });
 });

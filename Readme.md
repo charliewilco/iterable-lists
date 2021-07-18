@@ -5,15 +5,25 @@ Uses prettier, rollup, esbuild and vite for the example.
 ## Install
 
 ```sh
-yarn add @charliewilco/module
+yarn add @charliewilco/iterable-lists
 ```
 
 ## Usage
 
 ```ts
-import { SomeClass } from "@charliewilco/module";
+import { Queue } from "@charliewilco/iterable-lists";
 
-const c = new SomeClass();
+const q = new Queue();
 
-c.useMethod();
+q.add("1");
+q.add("2");
+
+q.head; // "2"
+
+for (const value of q) {
+  console.log(value);
+}
+
+// "1"
+// "2"
 ```
