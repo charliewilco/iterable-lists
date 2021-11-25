@@ -8,41 +8,41 @@ export interface IListLike<T> {
 }
 
 export abstract class BaseList<T> implements IListLike<T> {
-  private _size: number = 0;
-  private _head?: INode<T>;
-  private _tail?: INode<T>;
+  #size: number = 0;
+  #head?: INode<T>;
+  #tail?: INode<T>;
   constructor() {}
 
   get isEmpty() {
-    return this._size === 0;
+    return this.#size === 0;
   }
 
   get size() {
-    return this._size;
+    return this.#size;
   }
 
   get head() {
-    return this._head;
+    return this.#head;
   }
 
   get tail() {
-    return this._tail;
+    return this.#tail;
   }
 
   protected addFront(value: T): boolean {
     const n = new ListNode(value);
 
-    if (this._size !== 0 && this._head) {
-      this._head.prev = n;
+    if (this.#size !== 0 && this.#head) {
+      this.#head.prev = n;
 
-      n.next = this._head;
+      n.next = this.#head;
 
-      this._head = n;
-      this._size++;
+      this.#head = n;
+      this.#size++;
     } else {
-      this._size++;
-      this._head = n;
-      this._tail = n;
+      this.#size++;
+      this.#head = n;
+      this.#tail = n;
     }
     return true;
   }
@@ -50,19 +50,19 @@ export abstract class BaseList<T> implements IListLike<T> {
   protected addBack(val: T): boolean {
     const n = new ListNode(val);
 
-    if (this._size !== 0 && this._tail) {
+    if (this.#size !== 0 && this.#tail) {
       // link old tail forwards
-      this._tail.next = n;
+      this.#tail.next = n;
 
       // link new tail backwards
-      n.prev = this._tail;
+      n.prev = this.#tail;
 
-      this._tail = n;
-      this._size++;
+      this.#tail = n;
+      this.#size++;
     } else {
-      this._size++;
-      this._head = n;
-      this._tail = n;
+      this.#size++;
+      this.#head = n;
+      this.#tail = n;
     }
 
     return true;
@@ -73,11 +73,11 @@ export abstract class BaseList<T> implements IListLike<T> {
       return this.addFront(val);
     }
 
-    if (index === this._size) {
+    if (index === this.#size) {
       return this.addBack(val);
     }
 
-    if (index < 0 || index >= this._size || !this._head) return false;
+    if (index < 0 || index >= this.#size || !this.#head) return false;
 
     let current = this.head;
     // traverse to index
@@ -101,68 +101,68 @@ export abstract class BaseList<T> implements IListLike<T> {
       current.next = newNode;
     }
 
-    this._size++;
+    this.#size++;
 
     return true;
   }
 
   protected removeFront(): T | null {
-    if (!this._head) return null;
+    if (!this.#head) return null;
 
     // extract val of head so we can return it later
-    const val = this._head?.data;
+    const val = this.#head?.data;
 
-    if (this._head && this._head.next) {
+    if (this.#head && this.#head.next) {
       // newHead.prev = null
-      this._head.next.prev = null;
+      this.#head.next.prev = null;
 
       // move head pointer forwards
-      this._head = this._head.next;
+      this.#head = this.#head.next;
 
-      this._size--;
+      this.#size--;
     } else {
       // list is size 1, clear the list
-      this._clear();
+      this.#clear();
     }
 
     return val;
   }
 
   protected removeBack(): T | null {
-    if (!this._tail) return null;
+    if (!this.#tail) return null;
 
     // extract the val of tail so we can return it later
-    const val = this._tail.data;
+    const val = this.#tail.data;
 
-    if (this._tail.prev) {
+    if (this.#tail.prev) {
       // newTail.next = null
-      this._tail.prev.next = null;
+      this.#tail.prev.next = null;
 
       // move tail pointer backwards
-      this._tail = this._tail.prev;
+      this.#tail = this.#tail.prev;
 
-      this._size--;
+      this.#size--;
     } else {
       // list is size 1, clear the list
-      this._clear();
+      this.#clear();
     }
 
     return val;
   }
 
   protected removeAt(index: number): T | null {
-    if (!this._head) return null;
+    if (!this.#head) return null;
 
     if (index === 0) {
       return this.removeFront();
-    } else if (index === this._size - 1) {
+    } else if (index === this.#size - 1) {
       return this.removeBack();
     }
 
-    if (index < 0 || index >= this._size) return null;
+    if (index < 0 || index >= this.#size) return null;
 
     let jIndex = 0;
-    let current = this._head;
+    let current = this.#head;
 
     // traverse to node to be deleted
     while (jIndex < index) {
@@ -174,13 +174,13 @@ export abstract class BaseList<T> implements IListLike<T> {
     current.prev!.next = current.next; // eslint-disable-line
     current.next!.prev = current.prev; // eslint-disable-line
 
-    this._size--;
+    this.#size--;
 
     return current.data;
   }
 
   protected indexOf(value: T): number {
-    if (this._tail !== undefined && this._head !== undefined) {
+    if (this.#tail !== undefined && this.#head !== undefined) {
       return -1;
     }
 
@@ -204,9 +204,9 @@ export abstract class BaseList<T> implements IListLike<T> {
     return index !== -1;
   }
 
-  private _clear() {
-    this._head = undefined;
-    this._tail = undefined;
-    this._size = 0;
+  #clear() {
+    this.#head = undefined;
+    this.#tail = undefined;
+    this.#size = 0;
   }
 }
