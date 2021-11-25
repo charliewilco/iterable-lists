@@ -15,7 +15,7 @@ export class Stack<T> extends BaseList<T> implements IStackList<T>, Iterable<T> 
     }
   }
 
-  public peek(): T {
+  peek(): T {
     if (this.tail) {
       return this.tail.data;
     }
@@ -23,15 +23,15 @@ export class Stack<T> extends BaseList<T> implements IStackList<T>, Iterable<T> 
     throw new Error("Tooooooo much");
   }
 
-  public add(value: T) {
+  add(value: T) {
     return this.addBack(value);
   }
 
-  public remove() {
+  remove() {
     return this.removeBack();
   }
 
-  public values(): T[] {
+  values(): T[] {
     const values = [];
     let current: INode<T> | null | undefined = this.tail;
     while (current !== null) {

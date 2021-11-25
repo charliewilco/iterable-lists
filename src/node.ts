@@ -5,9 +5,9 @@ export interface INode<T> {
 }
 
 export class ListNode<T> implements INode<T> {
-  public data: T;
-  public prev: INode<T> | null = null;
-  public next: INode<T> | null = null;
+  data: T;
+  prev: INode<T> | null = null;
+  next: INode<T> | null = null;
   constructor(data: T) {
     this.data = data;
   }

@@ -1,4 +1,4 @@
-import { INode } from "./node";
+import type { INode } from "./node";
 import { BaseList, IListLike } from "./base";
 
 interface IQueueList<T> extends IListLike<T> {
@@ -16,7 +16,7 @@ export class Queue<T> extends BaseList<T> implements IQueueList<T>, Iterable<T> 
     }
   }
 
-  public static fromEntries<T>(array: T[]): Queue<T> {
+  static fromEntries<T>(array: T[]): Queue<T> {
     const q = new Queue<T>();
 
     for (const value of array) {
@@ -26,7 +26,7 @@ export class Queue<T> extends BaseList<T> implements IQueueList<T>, Iterable<T> 
     return q;
   }
 
-  public peek(): T {
+  peek(): T {
     if (this.head) {
       return this.head.data;
     }
@@ -34,15 +34,15 @@ export class Queue<T> extends BaseList<T> implements IQueueList<T>, Iterable<T> 
     throw new Error("Tooooooo much");
   }
 
-  public add(value: T): boolean {
+  add(value: T): boolean {
     return this.addFront(value);
   }
 
-  public remove(): T | null {
+  remove(): T | null {
     return this.removeFront();
   }
 
-  public values(): T[] {
+  values(): T[] {
     const values = [];
     let current: INode<T> | null | undefined = this.head;
     while (current !== null) {

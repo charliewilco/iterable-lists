@@ -1,14 +1,12 @@
+// @ts-check
+import { defineConfig } from "rollup";
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 
-const bundle = (config) => ({
-  ...config,
-  input: "src/index.ts",
-  external: (id) => !/^[./]/.test(id),
-});
-
-export default [
-  bundle({
+export default defineConfig([
+  {
+    input: "src/index.ts",
+    external: (id) => !/^[./]/.test(id),
     plugins: [esbuild()],
     output: [
       {
@@ -22,12 +20,14 @@ export default [
         sourcemap: true,
       },
     ],
-  }),
-  bundle({
+  },
+  {
+    input: "src/index.ts",
+    external: (id) => !/^[./]/.test(id),
     plugins: [dts()],
     output: {
       file: "dist/index.d.ts",
       format: "es",
     },
-  }),
-];
+  },
+]);
