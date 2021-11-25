@@ -6,14 +6,13 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
+  "files": ["dist/**/*"],
   "scripts": {
     "prepublish": "yarn build",
     "prebuild": "rm -rf dist",
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest --verbose --runInBand",
+    "test:ci": "yarn test --ci --no-cache"
   },
   "devDependencies": {
     "esbuild": "^0.13.15",
