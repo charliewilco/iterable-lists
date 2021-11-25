@@ -1,12 +1,14 @@
 {
   "name": "@charliewilco/iterable-lists",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "repository": "charliewilco/iterable-lists",
   "license": "Unlicense",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "prepublish": "yarn build",
     "prebuild": "rm -rf dist",
