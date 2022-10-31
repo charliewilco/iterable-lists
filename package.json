@@ -1,39 +1,41 @@
 {
-  "name": "@charliewilco/iterable-lists",
-  "version": "0.1.4",
-  "repository": "charliewilco/iterable-lists",
-  "license": "Unlicense",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "prepublish": "yarn build",
-    "prebuild": "rm -rf dist",
-    "build": "rollup -c",
-    "test": "jest --verbose --runInBand",
-    "test:ci": "yarn test --ci --no-cache"
-  },
-  "devDependencies": {
-    "esbuild": "^0.13.15",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "rollup": "^2.60.0",
-    "rollup-plugin-dts": "^4.0.1",
-    "rollup-plugin-esbuild": "^4.7.2",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.5.2"
-  },
-  "prettier": {
-    "printWidth": 95,
-    "singleQuote": false,
-    "semi": true,
-    "bracketSpacing": true,
-    "jsxBracketSameLine": true
-  },
-  "jest": {
-    "preset": "ts-jest"
-  }
+	"name": "@charliewilco/iterable-lists",
+	"version": "0.1.4",
+	"repository": "charliewilco/iterable-lists",
+	"license": "Unlicense",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.esm.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist/**/*"
+	],
+	"scripts": {
+		"prepublish": "npm run build",
+		"prebuild": "rm -rf dist",
+		"build": "rollup -c",
+		"test": "jest --verbose --runInBand",
+		"test:ci": "npm test -- --ci --no-cache"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.2.0",
+		"esbuild": "^0.15.12",
+		"jest": "^29.2.2",
+		"prettier": "^2.7.1",
+		"rollup": "^3.2.2",
+		"rollup-plugin-dts": "^5.0.0",
+		"rollup-plugin-esbuild": "^4.10.1",
+		"ts-jest": "^29.0.3",
+		"typescript": "^4.8.4"
+	},
+	"prettier": {
+		"printWidth": 95,
+		"singleQuote": false,
+		"semi": true,
+		"bracketSpacing": true,
+		"jsxBracketSameLine": true,
+		"useTabs": true
+	},
+	"jest": {
+		"preset": "ts-jest"
+	}
 }
